@@ -18,14 +18,21 @@ if file is not None:
   
 num_col = df.select_dtypes(include='number').columns.to_list()
 
-col1,col2,col3 = st.columns(3)
-with col1:
- x_col = st.selectbox('choose x column',num_col)
-with col2:
-  y_col = st.selectbox('choose y column',num_col)
-with col3:
-  color = st.selectbox('choose color',df.columns.to_list())
+tab1,tab2 = st.tabs(['scatter','histogram'])
+
+with tab1:
+  col1,col2,col3 = st.columns(3)
+  with col1:
+  x_col = st.selectbox('choose x column',num_col)
+  with col2:
+    y_col = st.selectbox('choose y column',num_col)
+  with col3:
+    color = st.selectbox('choose color',df.columns.to_list())
 
 
-fig = px.scatter(df,x=x_col,y=y_col,color=color)
-st.plotly_chart(fig)
+  fig = px.scatter(df,x=x_col,y=y_col,color=color)
+  st.plotly_chart(fig)
+
+with tab2:
+fig2 = px.histogram(df,x='population')
+st.plotly_chart(fig2)
