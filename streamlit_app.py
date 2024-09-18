@@ -16,5 +16,16 @@ if file is not None:
  else:
   st.write(df[:num_row])
   
-figure= px.scatter(df,x='population',y='total_rooms')
-st.plotly_chart(figure)
+num_col = df.select_dtypes(include='number').columns.to_list()
+
+col1,col2,col3 = st.columns(3)
+with col1:
+ x_col = st.selectbox('choose x column',num_col)
+with col2:
+  y_col = st.selectbox('choose y column',num_col)
+with col3:
+  color = st.selectbox('choose color',df.columns.to_list())
+
+
+fig = px.scatter(df,x=x_col,y=y_col,color=color)
+st.plotly_chart(fig)
