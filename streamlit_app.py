@@ -13,3 +13,5 @@ if file is not None:
   st.write(df[:num_row][names_column])
  else:
   st.write(df[:num_row])
+figure= px.scatter(df,x='population',y='total_rooms')
+st.plotly_chart(figure)
